@@ -3,9 +3,13 @@ import PropTypes from 'prop-types'
 import React from 'react'
 import styled from 'styled-components'
 
+import codeIcon from '../assets/icons/embed2.svg'
+
 const StyledHeader = styled.div`
   background: black;
   margin-bottom: 1.45rem;
+  display: flex;
+  align-items: center;
 `
 
 const StyledH1 = styled.h1`
@@ -20,8 +24,15 @@ const StyledLink = styled(Link).attrs({
   text-decoration: none;
 `
 
+const StyledLogo = styled.img`
+  margin: 0 15px;
+  height: 50px;
+  width: 50px;
+`
+
 const Header = ({ siteTitle }) => (
   <StyledHeader>
+    <StyledLogo src={codeIcon} />
     <StyledH1>
       <StyledLink>{siteTitle}</StyledLink>
     </StyledH1>
