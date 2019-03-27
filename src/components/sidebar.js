@@ -1,0 +1,50 @@
+import PropTypes from 'prop-types'
+import React from 'react'
+import styled from 'styled-components'
+
+import fire from '../assets/icons/fire.svg'
+import spinner from '../assets/icons/spinner.svg'
+
+const StyledSideBar = styled.div`
+  overflow-y: auto;
+  width: 300px;
+  background-color: black;
+  color: white;
+  padding: 1.45rem 0;
+`
+
+const StyledLinkIcon = styled.img`
+  height: 20px;
+  width: 20px;
+  margin: 0 20px;
+`
+
+const StyledLink = styled.a.attrs({
+  alt: 'project page icon',
+})`
+  color: white;
+  text-decoration: none;
+  display: flex;
+  p {
+    font-size: 16px;
+    color: white;
+    text-decoration: none;
+  }
+`
+
+const SideBarLink = props => (
+  <StyledLink href={props.to}>
+    <StyledLinkIcon src={props.src} />
+    <p>{props.children}</p>
+  </StyledLink>
+)
+
+const SideBar = props => (
+  <StyledSideBar>
+    <SideBarLink to="/" src={fire}>
+      Favorites
+    </SideBarLink>
+  </StyledSideBar>
+)
+
+export default SideBar

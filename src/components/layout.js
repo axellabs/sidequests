@@ -4,11 +4,20 @@ import { StaticQuery, graphql } from 'gatsby'
 import styled from 'styled-components'
 
 import Header from './header'
+import SideBar from './sidebar'
 import './layout.css'
 
-const StyledPageContainer = styled.div`
+const StyledContentContainer = styled.div`
   padding: 0px 1.0875rem 1.45rem;
   padding-top: 0;
+  background-color: #303030;
+  color: white;
+  padding-top: 1.45rem;
+  width: 100%;
+`
+
+const StyledPageContainer = styled.div`
+  display: flex;
 `
 
 const Layout = ({ children }) => (
@@ -25,7 +34,10 @@ const Layout = ({ children }) => (
     render={data => (
       <>
         <Header siteTitle={data.site.siteMetadata.title} />
-        <StyledPageContainer>{children}</StyledPageContainer>
+        <StyledPageContainer>
+          <SideBar />
+          <StyledContentContainer>{children}</StyledContentContainer>
+        </StyledPageContainer>
       </>
     )}
   />

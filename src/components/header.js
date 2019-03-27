@@ -7,9 +7,10 @@ import codeIcon from '../assets/icons/embed2.svg'
 
 const StyledHeader = styled.div`
   background: black;
-  margin-bottom: 1.45rem;
   display: flex;
   align-items: center;
+  border-bottom: 2px solid white;
+  height: 100px;
 `
 
 const StyledH1 = styled.h1`
