@@ -5,16 +5,8 @@ import styled from 'styled-components'
 
 import Header from './header'
 import SideBar from './sidebar'
+import Content from './content'
 import './layout.css'
-
-const StyledContentContainer = styled.div`
-  padding: 0px 1.0875rem 1.45rem;
-  padding-top: 0;
-  background-color: #303030;
-  color: white;
-  padding-top: 1.45rem;
-  width: 100%;
-`
 
 const StyledPageContainer = styled.div`
   display: flex;
@@ -36,7 +28,7 @@ const Layout = ({ children }) => (
         <Header siteTitle={data.site.siteMetadata.title} />
         <StyledPageContainer>
           <SideBar />
-          <StyledContentContainer>{children}</StyledContentContainer>
+          <Content>{children}</Content>
         </StyledPageContainer>
       </>
     )}

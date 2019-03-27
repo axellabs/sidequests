@@ -1,4 +1,3 @@
-import PropTypes from 'prop-types'
 import React from 'react'
 import styled from 'styled-components'
 
@@ -8,6 +7,7 @@ import spinner from '../assets/icons/spinner.svg'
 const StyledSideBar = styled.div`
   overflow-y: auto;
   width: 300px;
+  min-height: calc(100vh - 100px);
   background-color: black;
   color: white;
   padding: 1.45rem 0;
@@ -43,6 +43,9 @@ const SideBar = props => (
   <StyledSideBar>
     <SideBarLink to="/" src={fire}>
       Favorites
+    </SideBarLink>
+    <SideBarLink to="/brainstorm/" src={spinner}>
+      Running Projects
     </SideBarLink>
   </StyledSideBar>
 )
