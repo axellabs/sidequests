@@ -3,10 +3,11 @@ import styled from 'styled-components'
 
 const StyledContentContainer = styled.div`
   padding: 0;
-  background-color: #303030;
+  background-color: black;
   color: white;
   width: 100%;
-  min-height: calc(100vh - 100px);
+  min-height: 100vh;
+  overflow-y: auto;
 `
 
 const Content = props => (

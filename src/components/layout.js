@@ -3,7 +3,6 @@ import PropTypes from 'prop-types'
 import { StaticQuery, graphql } from 'gatsby'
 import styled from 'styled-components'
 
-import Header from './header'
 import SideBar from './sidebar'
 import Content from './content'
 import './layout.css'
@@ -24,13 +23,10 @@ const Layout = ({ children }) => (
       }
     `}
     render={data => (
-      <>
-        <Header siteTitle={data.site.siteMetadata.title} />
-        <StyledPageContainer>
-          <SideBar />
-          <Content>{children}</Content>
-        </StyledPageContainer>
-      </>
+      <StyledPageContainer>
+        <SideBar siteTitle={data.site.siteMetadata.title} />
+        <Content>{children}</Content>
+      </StyledPageContainer>
     )}
   />
 )

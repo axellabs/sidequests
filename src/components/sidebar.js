@@ -2,18 +2,26 @@ import React, { Component } from 'react'
 import styled from 'styled-components'
 import { Link, StaticQuery, graphql } from 'gatsby'
 
-import fire from '../assets/icons/fire.svg'
-import spinner from '../assets/icons/spinner.svg'
-import book from '../assets/icons/book-dark.svg'
-import star from '../assets/icons/star.svg'
-import home from '../assets/icons/home.svg'
+import fire from '../assets/icons/fire-light.svg'
+import spinner from '../assets/icons/spinner-light.svg'
+import book from '../assets/icons/book-light.svg'
+import star from '../assets/icons/star-light.svg'
+import home from '../assets/icons/home-light.svg'
+
+const Header = styled.p`
+  font-size: 45px;
+  color: black;
+  padding: 20px;
+  margin-top: 20px;
+  margin-bottom: 70px;
+`
 
 const StyledSideBar = styled.div`
   overflow-y: auto;
   width: 500px;
-  min-height: calc(100vh - 100px);
-  background-color: black;
-  color: white;
+  min-height: 100vh;
+  background-color: white;
+  color: black;
   padding: 1.45rem 0;
 `
 
@@ -26,19 +34,19 @@ const StyledLinkIcon = styled.img`
 const StyledLink = styled(Link).attrs({
   alt: 'project page icon',
 })`
-  color: white;
+  color: black;
   text-decoration: none;
   display: flex;
   p {
     font-size: 16px;
-    color: white;
+    color: black;
     text-decoration: none;
   }
 `
 
 const StyledText = styled.p`
   font-size: 16px;
-  color: white;
+  color: black;
 `
 
 const ProjectText = props => (
@@ -108,6 +116,11 @@ const SideBar = () => (
   <StaticQuery
     query={graphql`
       query sideBar {
+        site {
+          siteMetadata {
+            title
+          }
+        }
         allMdx {
           edges {
             node {
@@ -144,6 +157,9 @@ const SideBar = () => (
 
       return (
         <StyledSideBar>
+          <Header>
+            <StyledLink to="/">{data.site.siteMetadata.title}</StyledLink>
+          </Header>
           <SideBarLink to="/" src={fire}>
             Favorites
           </SideBarLink>

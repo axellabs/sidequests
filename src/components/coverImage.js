@@ -4,7 +4,7 @@ import Image from './image'
 
 const StyledCoverImage = styled.div`
   width: 100%;
-  height: 500px;
+  min-height: 150px;
   position: relative;
   overflow: hidden;
 `
@@ -21,6 +21,7 @@ const StyledCoverTitle = styled.div`
   font-size: 45px;
   color: white;
   background-color: rgba(0, 0, 0, 0.5);
+  padding: 0 30px;
 `
 
 const CoverImage = props => (
