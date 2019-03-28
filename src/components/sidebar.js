@@ -4,7 +4,7 @@ import { Link, StaticQuery, graphql } from 'gatsby'
 
 import fire from '../assets/icons/fire.svg'
 import spinner from '../assets/icons/spinner.svg'
-import book from '../assets/icons/book-dark.svg'
+import folder from '../assets/icons/folder.svg'
 
 const StyledSideBar = styled.div`
   overflow-y: auto;
@@ -72,7 +72,7 @@ const SideBar = () => (
             Running Projects
           </SideBarLink>
           {posts.map(({ node: post }) => (
-            <SideBarLink to={post.fields.slug} src={book}>
+            <SideBarLink to={post.fields.slug} src={folder}>
               {post.frontmatter.title}
             </SideBarLink>
           ))}
