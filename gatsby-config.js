@@ -14,6 +14,13 @@ module.exports = {
         defaultLayouts: { default: path.resolve('./src/components/layout.js') },
       },
     },
+    {
+      resolve: `gatsby-source-filesystem`,
+      options: {
+        name: `projects`,
+        path: `${__dirname}/src/projects`,
+      },
+    },
     'gatsby-plugin-react-helmet',
     {
       resolve: `gatsby-source-filesystem`,

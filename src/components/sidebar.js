@@ -3,6 +3,7 @@ import styled from 'styled-components'
 
 import fire from '../assets/icons/fire.svg'
 import spinner from '../assets/icons/spinner.svg'
+import book from '../assets/icons/book-dark.svg'
 
 const StyledSideBar = styled.div`
   overflow-y: auto;
@@ -46,6 +47,9 @@ const SideBar = props => (
     </SideBarLink>
     <SideBarLink to="/brainstorm/" src={spinner}>
       Running Projects
+    </SideBarLink>
+    <SideBarLink to="/projects/project1" src={book}>
+      Project 1
     </SideBarLink>
   </StyledSideBar>
 )
