@@ -1,8 +1,8 @@
 {
   "name": "gatsby-starter-mdx-basic",
-  "description": "Gatsby starter MDX basic",
+  "description": "Sidequests Organizer",
   "version": "1.0.0",
-  "author": "Chris Biscardi <chris@christopherbiscardi.com>",
+  "author": "Axel Simms <mail@axelsimms.com>",
   "dependencies": {
     "@mdx-js/mdx": "^0.16.6",
     "@mdx-js/tag": "^0.16.6",

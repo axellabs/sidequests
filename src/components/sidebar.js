@@ -4,9 +4,9 @@ import { Link, StaticQuery, graphql } from 'gatsby'
 
 import fire from '../assets/icons/fire.svg'
 import spinner from '../assets/icons/spinner.svg'
-import folder from '../assets/icons/folder.svg'
-import folderOpen from '../assets/icons/folder-open.svg'
+import book from '../assets/icons/book-dark.svg'
 import star from '../assets/icons/star.svg'
+import home from '../assets/icons/home.svg'
 
 const StyledSideBar = styled.div`
   overflow-y: auto;
@@ -36,6 +36,21 @@ const StyledLink = styled(Link).attrs({
   }
 `
 
+const StyledText = styled.p`
+  font-size: 16px;
+  color: white;
+`
+
+const ProjectText = props => (
+  <div
+    style={{ display: 'flex', cursor: 'pointer', zIndex: 10 }}
+    onClick={props.onClick}
+  >
+    <StyledLinkIcon src={book} />
+    <StyledText>{props.children}</StyledText>
+  </div>
+)
+
 const SideBarLink = props => (
   <StyledLink to={props.to}>
     <StyledLinkIcon src={props.src} />
@@ -43,14 +58,13 @@ const SideBarLink = props => (
   </StyledLink>
 )
 
-const ParentLink = props => (
-  <SideBarLink {...props} src={props.open ? folderOpen : folder} />
-)
+const ParentLink = props => <SideBarLink {...props} src={home} />
 
 const ChildLink = props => <SideBarLink {...props} src={star} />
 
 const StyledAccordion = styled.div`
-  height: auto;
+  height: ${props => (props.open ? 'auto' : '50px')};
+  overflow-y: hidden;
 `
 
 class Accordion extends Component {
@@ -60,14 +74,25 @@ class Accordion extends Component {
       open: false,
     }
   }
+
+  toggleAccordion = () => {
+    this.setState(prevState => ({
+      open: !prevState.open,
+    }))
+  }
+
   render() {
     const { parent, subposts } = this.props
+    const { open } = this.state
     return (
-      <StyledAccordion>
-        <ParentLink to={parent.fields.slug}>
+      <StyledAccordion open={open}>
+        <ProjectText onClick={this.toggleAccordion} open={open}>
           {parent.frontmatter.title}
-        </ParentLink>
+        </ProjectText>
         <div style={{ marginLeft: '45px' }}>
+          <ParentLink to={parent.fields.slug} open={open}>
+            {parent.frontmatter.title}
+          </ParentLink>
           {subposts.map(({ node: post }) => (
             <ChildLink to={post.fields.slug} key={post.fields.slug}>
               {post.frontmatter.title}
@@ -116,8 +141,6 @@ const SideBar = () => (
             !node.frontmatter.projectPage
         ),
       }))
-
-      console.log(hierarchalPosts)
 
       return (
         <StyledSideBar>
