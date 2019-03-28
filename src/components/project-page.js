@@ -2,11 +2,18 @@ import React from 'react'
 import { graphql } from 'gatsby'
 import MDXRenderer from 'gatsby-mdx/mdx-renderer'
 
+import DefaultPageLayout from './defaultPageLayout'
+import CoverImage from './coverImage'
+import SEO from './seo'
+
 function ProjectPage({ data }) {
   return (
     <>
-      <h1>{data.mdx.frontmatter.title}</h1>
-      <MDXRenderer>{data.mdx.code.body}</MDXRenderer>
+      <SEO title={data.mdx.frontmatter.title} />
+      <CoverImage>{data.mdx.frontmatter.title}</CoverImage>
+      <DefaultPageLayout>
+        <MDXRenderer>{data.mdx.code.body}</MDXRenderer>
+      </DefaultPageLayout>
     </>
   )
 }
