@@ -3,10 +3,10 @@ import styled from 'styled-components'
 import Image from './image'
 
 const StyledCoverImage = styled.div`
-  width: 100%;
-  min-height: 150px;
+  height: 150px;
   position: relative;
   overflow: hidden;
+  margin: ${props => (props.page ? '-1.45rem -1.0875rem' : '0')};
 `
 
 const StyledCoverTitle = styled.div`
@@ -22,10 +22,11 @@ const StyledCoverTitle = styled.div`
   color: white;
   background-color: rgba(0, 0, 0, 0.5);
   padding: 0 30px;
+  line-height: 1.5;
 `
 
 const CoverImage = props => (
-  <StyledCoverImage>
+  <StyledCoverImage {...props}>
     <Image />
     <StyledCoverTitle>{props.children}</StyledCoverTitle>
   </StyledCoverImage>
