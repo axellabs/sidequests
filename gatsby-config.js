@@ -10,9 +10,6 @@ module.exports = {
   plugins: [
     {
       resolve: `gatsby-mdx`,
-      options: {
-        defaultLayouts: { default: path.resolve('./src/components/layout.js') },
-      },
     },
     {
       resolve: `gatsby-source-filesystem`,
