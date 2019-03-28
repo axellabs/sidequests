@@ -1,26 +1,31 @@
 import React from 'react'
-import { graphql } from 'gatsby'
+import { StaticQuery, graphql } from 'gatsby'
 import MDXRenderer from 'gatsby-mdx/mdx-renderer'
 
-const ProjectPageLayout = ({ data: { mdx } }) => (
-  <div>
-    <h1>{mdx.frontmatter.title}TEST</h1>
-    <MDXRenderer>{mdx.code.body}</MDXRenderer>
-  </div>
-)
+import Layout from './layout'
 
-export const pageQuery = graphql`
-  query BlogPostQuery($id: String) {
-    mdx(id: { eq: $id }) {
-      id
-      frontmatter {
-        title
+const ProjectPageLayout = () => (
+  <StaticQuery
+    query={graphql`
+      query BlogPostQuery($id: String) {
+        mdx(id: { eq: $id }) {
+          id
+          frontmatter {
+            title
+          }
+          code {
+            body
+          }
+        }
       }
-      code {
-        body
-      }
-    }
-  }
-`
+    `}
+    render={data => (
+      <Layout>
+        <h1>{data.mdx.frontmatter.title}</h1>
+        <MDXRenderer>{data.mdx.code.body}</MDXRenderer>
+      </Layout>
+    )}
+  />
+)
 
 export default ProjectPageLayout

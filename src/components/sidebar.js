@@ -1,5 +1,6 @@
 import React from 'react'
 import styled from 'styled-components'
+import { Link, StaticQuery, graphql } from 'gatsby'
 
 import fire from '../assets/icons/fire.svg'
 import spinner from '../assets/icons/spinner.svg'
@@ -20,7 +21,7 @@ const StyledLinkIcon = styled.img`
   margin: 0 20px;
 `
 
-const StyledLink = styled.a.attrs({
+const StyledLink = styled(Link).attrs({
   alt: 'project page icon',
 })`
   color: white;
@@ -34,24 +35,51 @@ const StyledLink = styled.a.attrs({
 `
 
 const SideBarLink = props => (
-  <StyledLink href={props.to}>
+  <StyledLink to={props.to}>
     <StyledLinkIcon src={props.src} />
     <p>{props.children}</p>
   </StyledLink>
 )
 
-const SideBar = props => (
-  <StyledSideBar>
-    <SideBarLink to="/" src={fire}>
-      Favorites
-    </SideBarLink>
-    <SideBarLink to="/brainstorm/" src={spinner}>
-      Running Projects
-    </SideBarLink>
-    <SideBarLink to="/projects/project1" src={book}>
-      Project 1
-    </SideBarLink>
-  </StyledSideBar>
+const SideBar = () => (
+  <StaticQuery
+    query={graphql`
+      query sideBar {
+        allMdx {
+          edges {
+            node {
+              id
+              excerpt
+              frontmatter {
+                title
+              }
+              fields {
+                slug
+              }
+            }
+          }
+        }
+      }
+    `}
+    render={data => {
+      const { edges: posts } = data.allMdx
+      return (
+        <StyledSideBar>
+          <SideBarLink to="/" src={fire}>
+            Favorites
+          </SideBarLink>
+          <SideBarLink to="/brainstorm/" src={spinner}>
+            Running Projects
+          </SideBarLink>
+          {posts.map(({ node: post }) => (
+            <SideBarLink to={post.fields.slug} src={book}>
+              {post.frontmatter.title}
+            </SideBarLink>
+          ))}
+        </StyledSideBar>
+      )
+    }}
+  />
 )
 
 export default SideBar
