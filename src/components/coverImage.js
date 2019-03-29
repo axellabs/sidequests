@@ -6,7 +6,8 @@ const StyledCoverImage = styled.div`
   height: 150px;
   position: relative;
   overflow: hidden;
-  margin: ${props => (props.page ? '-1.45rem -1.0875rem' : '0')};
+  margin: ${props =>
+    props.page ? '-1.45rem -1.0875rem 1.45rem  -1.0875rem' : '0'};
 `
 
 const StyledCoverTitle = styled.div`
