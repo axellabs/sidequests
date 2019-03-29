@@ -26,8 +26,8 @@ const StyledCoverTitle = styled.div`
 `
 
 const CoverImage = props => (
-  <StyledCoverImage {...props}>
-    <Image />
+  <StyledCoverImage page={props.page}>
+    <Image src={props.src} alt={props.alt} />
     <StyledCoverTitle>{props.children}</StyledCoverTitle>
   </StyledCoverImage>
 )

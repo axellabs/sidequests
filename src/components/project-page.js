@@ -10,7 +10,9 @@ function ProjectPage({ data }) {
   return (
     <>
       <SEO title={data.mdx.frontmatter.title} />
-      <CoverImage>{data.mdx.frontmatter.title}</CoverImage>
+      <CoverImage src={data.mdx.frontmatter.imgPath.childImageSharp.fluid.src}>
+        {data.mdx.frontmatter.title}
+      </CoverImage>
       <DefaultPageLayout>
         <MDXRenderer>{data.mdx.code.body}</MDXRenderer>
       </DefaultPageLayout>
@@ -24,6 +26,13 @@ export const pageQuery = graphql`
       id
       frontmatter {
         title
+        imgPath {
+          childImageSharp {
+            fluid {
+              src
+            }
+          }
+        }
       }
       code {
         body
