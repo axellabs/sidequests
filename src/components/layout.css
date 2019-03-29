@@ -1,3 +1,34 @@
+@font-face {
+  font-family: Avenir;
+  src: url('../assets/fonts/AvenirNextLTPro-HeavyCn.otf') format('otf');
+  font-weight: 500;
+}
+
+@font-face {
+  font-family: Avenir;
+  src: url('../assets/fonts/AvenirNextLTPro-MediumCn.otf') format('otf');
+  font-weight: 400;
+}
+
+@font-face {
+  font-family: Austin;
+  src: url('../assets/fonts/Austin-Roman.otf') format('otf');
+  font-weight: 400;
+}
+
+@font-face {
+  font-family: Austin;
+  src: url('../assets/fonts/Austin-Italic.otf') format('otf');
+  font-weight: 400;
+  font-style: italic;
+}
+
+@font-face {
+  font-family: Austin;
+  src: url('../assets/fonts/Austin-Bold.otf') format('otf');
+  font-weight: 600;
+}
+
 html {
   font-family: sans-serif;
   -ms-text-size-adjust: 100%;

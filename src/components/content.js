@@ -8,6 +8,8 @@ const StyledContentContainer = styled.div`
   width: 100%;
   min-height: 100vh;
   overflow-y: auto;
+  font-family: Austin;
+  font-weight: 400;
 `
 
 const Content = props => (

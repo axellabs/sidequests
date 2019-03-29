@@ -11,7 +11,6 @@ import home from '../assets/icons/home-light.svg'
 
 import fireDark from '../assets/icons/fire.svg'
 import spinnerDark from '../assets/icons/spinner.svg'
-import bookDark from '../assets/icons/book-dark.svg'
 import starDark from '../assets/icons/star.svg'
 import homeDark from '../assets/icons/home.svg'
 
@@ -21,6 +20,8 @@ const Header = styled.p`
   padding: 20px;
   margin-top: 20px;
   margin-bottom: 70px;
+  font-family: Austin;
+  font-weight: 600;
 `
 
 const StyledSideBar = styled.div`
@@ -47,6 +48,7 @@ const StyledLink = styled(Link).attrs({
   background-color: ${props => (props.active === 'true' ? 'black' : 'white')};
   text-decoration: none;
   display: flex;
+  font-family: inherit;
   p {
     font-size: 16px;
     color: ${props => (props.active === 'true' ? 'white' : 'black')};
@@ -68,6 +70,8 @@ const ProjectText = props => (
       cursor: 'pointer',
       zIndex: 10,
       padding: '10px 0',
+      fontFamily: 'Avenir',
+      fontWeight: 500,
     }}
     onClick={props.onClick}
   >
@@ -130,7 +134,11 @@ class Accordion extends Component {
             to={parent.fields.slug}
             open={open}
             active={(parent.fields.slug === location).toString()}
-            style={{ paddingLeft: '45px' }}
+            style={{
+              paddingLeft: '45px',
+              fontFamily: 'Avenir',
+              fontWeight: 400,
+            }}
           >
             {parent.frontmatter.title}
           </ParentLink>
@@ -139,7 +147,11 @@ class Accordion extends Component {
               to={post.fields.slug}
               key={post.fields.slug}
               location={location}
-              style={{ paddingLeft: '45px' }}
+              style={{
+                paddingLeft: '45px',
+                fontFamily: 'Avenir',
+                fontWeight: 400,
+              }}
             >
               {post.frontmatter.title}
             </ChildLink>
@@ -207,6 +219,10 @@ const SideBar = props => (
                     src={fire}
                     activeSrc={fireDark}
                     active={('/' === location.pathname).toString()}
+                    style={{
+                      fontFamily: 'Avenir',
+                      fontWeight: 500,
+                    }}
                   >
                     Favorites
                   </SideBarLink>
@@ -215,6 +231,10 @@ const SideBar = props => (
                     src={spinner}
                     activeSrc={spinnerDark}
                     active={('/brainstorm/' === location.pathname).toString()}
+                    style={{
+                      fontFamily: 'Avenir',
+                      fontWeight: 500,
+                    }}
                   >
                     Running Projects
                   </SideBarLink>
