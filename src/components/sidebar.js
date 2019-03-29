@@ -3,6 +3,7 @@ import styled from 'styled-components'
 import { Link, StaticQuery, graphql } from 'gatsby'
 import { Location } from '@reach/router'
 
+import arrow from '../assets/icons/arrow.svg'
 import fire from '../assets/icons/fire-light.svg'
 import spinner from '../assets/icons/spinner-light.svg'
 import book from '../assets/icons/book-light.svg'
@@ -14,29 +15,44 @@ import spinnerDark from '../assets/icons/spinner.svg'
 import starDark from '../assets/icons/star.svg'
 import homeDark from '../assets/icons/home.svg'
 
-const Header = styled.p`
+const Header = styled.div`
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
   font-size: 45px;
   color: black;
-  padding: 20px;
+  padding: ${props => (props.open ? '20px' : 0)};
+  min-height: 85px;
   margin-top: 20px;
   margin-bottom: 70px;
   font-family: Austin;
   font-weight: 600;
+  a {
+    visibility: ${props => (props.open ? 'visible' : 'hidden')};
+    width: ${props => (props.open ? 'auto' : '0px')};
+  }
+
+  img {
+    transform: ${props => (props.open ? 'none' : 'rotate(180deg)')};
+  }
 `
 
 const StyledSideBar = styled.div`
   overflow-y: auto;
-  width: 500px;
+  overflow-x: hidden;
+  width: ${props => (props.open ? '500px' : '55px')};
   min-height: 100vh;
   background-color: white;
   color: black;
   padding: 1.45rem 0;
+  transition: width 0.3s;
 `
 
 const StyledLinkIcon = styled.img`
   height: 20px;
   width: 20px;
   margin: 0 20px;
+  cursor: pointer;
 `
 
 const StyledLink = styled(Link).attrs({
@@ -105,6 +121,7 @@ const ChildLink = props => (
 const StyledAccordion = styled.div`
   height: ${props => (props.open ? 'auto' : '45px')};
   overflow-y: hidden;
+  overflow-x: hidden;
 `
 
 class Accordion extends Component {
@@ -162,7 +179,89 @@ class Accordion extends Component {
   }
 }
 
-const SideBar = props => (
+class SideBar extends Component {
+  constructor(props) {
+    super(props)
+    this.state = {
+      open: true,
+    }
+  }
+
+  toggleSideBar = () => {
+    this.setState(prevState => ({
+      open: !prevState.open,
+    }))
+  }
+
+  render() {
+    const { data } = this.props
+    const { edges: posts } = data.allMdx
+
+    const parentPosts = posts.filter(
+      ({ node }) => node.frontmatter.projectPage === true
+    )
+
+    const hierarchalPosts = parentPosts.map(parentPost => ({
+      parent: parentPost.node,
+      subnodes: posts.filter(
+        ({ node }) =>
+          node.frontmatter.parent === parentPost.node.frontmatter.parent &&
+          !node.frontmatter.projectPage
+      ),
+    }))
+
+    return (
+      <StyledSideBar open={this.state.open}>
+        <Header open={this.state.open}>
+          <StyledLink to="/">{data.site.siteMetadata.title}</StyledLink>
+          <StyledLinkIcon src={arrow} onClick={this.toggleSideBar} />
+        </Header>
+        <Location>
+          {({ location }) => {
+            return (
+              <>
+                <SideBarLink
+                  to="/"
+                  src={fire}
+                  activeSrc={fireDark}
+                  active={('/' === location.pathname).toString()}
+                  style={{
+                    fontFamily: 'Avenir',
+                    fontWeight: 500,
+                  }}
+                >
+                  Favorites
+                </SideBarLink>
+                <SideBarLink
+                  to="/brainstorm/"
+                  src={spinner}
+                  activeSrc={spinnerDark}
+                  active={('/brainstorm/' === location.pathname).toString()}
+                  style={{
+                    fontFamily: 'Avenir',
+                    fontWeight: 500,
+                  }}
+                >
+                  Running Projects
+                </SideBarLink>
+                {hierarchalPosts.map(accordionData => (
+                  <Accordion
+                    parent={accordionData.parent}
+                    subposts={accordionData.subnodes}
+                    key={accordionData.parent.frontmatter.title}
+                    location={location.pathname}
+                  />
+                ))}
+              </>
+            )
+          }}
+        </Location>
+      </StyledSideBar>
+    )
+  }
+}
+
+export default props => (
   <StaticQuery
     query={graphql`
       query sideBar {
@@ -189,71 +288,6 @@ const SideBar = props => (
         }
       }
     `}
-    render={data => {
-      const { edges: posts } = data.allMdx
-
-      const parentPosts = posts.filter(
-        ({ node }) => node.frontmatter.projectPage === true
-      )
-
-      const hierarchalPosts = parentPosts.map(parentPost => ({
-        parent: parentPost.node,
-        subnodes: posts.filter(
-          ({ node }) =>
-            node.frontmatter.parent === parentPost.node.frontmatter.parent &&
-            !node.frontmatter.projectPage
-        ),
-      }))
-
-      return (
-        <StyledSideBar>
-          <Header>
-            <StyledLink to="/">{data.site.siteMetadata.title}</StyledLink>
-          </Header>
-          <Location>
-            {({ location }) => {
-              return (
-                <>
-                  <SideBarLink
-                    to="/"
-                    src={fire}
-                    activeSrc={fireDark}
-                    active={('/' === location.pathname).toString()}
-                    style={{
-                      fontFamily: 'Avenir',
-                      fontWeight: 500,
-                    }}
-                  >
-                    Favorites
-                  </SideBarLink>
-                  <SideBarLink
-                    to="/brainstorm/"
-                    src={spinner}
-                    activeSrc={spinnerDark}
-                    active={('/brainstorm/' === location.pathname).toString()}
-                    style={{
-                      fontFamily: 'Avenir',
-                      fontWeight: 500,
-                    }}
-                  >
-                    Running Projects
-                  </SideBarLink>
-                  {hierarchalPosts.map(accordionData => (
-                    <Accordion
-                      parent={accordionData.parent}
-                      subposts={accordionData.subnodes}
-                      key={accordionData.parent.frontmatter.title}
-                      location={location.pathname}
-                    />
-                  ))}
-                </>
-              )
-            }}
-          </Location>
-        </StyledSideBar>
-      )
-    }}
+    render={data => <SideBar data={data} {...props} />}
   />
 )
-
-export default SideBar
