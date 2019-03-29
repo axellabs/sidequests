@@ -6,7 +6,8 @@ import { Location } from '@reach/router'
 import arrow from '../assets/icons/arrow.svg'
 import fire from '../assets/icons/fire-light.svg'
 import spinner from '../assets/icons/spinner-light.svg'
-import book from '../assets/icons/book-light.svg'
+import folder from '../assets/icons/folder.svg'
+import folderOpen from '../assets/icons/folder-open.svg'
 import star from '../assets/icons/star-light.svg'
 import home from '../assets/icons/home-light.svg'
 
@@ -96,7 +97,7 @@ const ProjectTextStyled = styled.div`
 
 const ProjectText = props => (
   <ProjectTextStyled {...props}>
-    <StyledLinkIcon src={book} />
+    <StyledLinkIcon src={props.open ? folderOpen : folder} />
     {props.sideBarOpen ? <StyledText>{props.children}</StyledText> : <p />}
   </ProjectTextStyled>
 )
@@ -148,7 +149,11 @@ class Accordion extends Component {
     const { open } = this.state
     return (
       <StyledAccordion open={open}>
-        <ProjectText onClick={this.toggleAccordion} sideBarOpen={sideBarOpen}>
+        <ProjectText
+          onClick={this.toggleAccordion}
+          sideBarOpen={sideBarOpen}
+          open={open}
+        >
           {parent.frontmatter.title}
         </ProjectText>
         <div>
