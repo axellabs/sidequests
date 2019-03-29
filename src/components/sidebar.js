@@ -70,8 +70,6 @@ const StyledLink = styled(Link).attrs({
     color: ${props => (props.active === 'true' ? 'white' : 'inherit')};
     text-decoration: none;
     margin-bottom: 0px;
-    visibility: ${props => (props.sideBarOpen ? 'visible' : 'visible')};
-    width: ${props => (props.sideBarOpen ? '0px' : '100%')};
   }
   &:hover {
     color: #1f058e;
@@ -99,7 +97,7 @@ const ProjectTextStyled = styled.div`
 const ProjectText = props => (
   <ProjectTextStyled {...props}>
     <StyledLinkIcon src={book} />
-    <StyledText>{props.children}</StyledText>
+    {props.sideBarOpen ? <StyledText>{props.children}</StyledText> : <p />}
   </ProjectTextStyled>
 )
 
@@ -108,7 +106,7 @@ const SideBarLink = props => (
     <StyledLinkIcon
       src={props.active === 'true' ? props.activeSrc : props.src}
     />
-    <p>{props.children}</p>
+    {props.sideBarOpen ? <p>{props.children}</p> : <p />}
   </StyledLink>
 )
 
@@ -150,7 +148,7 @@ class Accordion extends Component {
     const { open } = this.state
     return (
       <StyledAccordion open={open}>
-        <ProjectText onClick={this.toggleAccordion} open={open}>
+        <ProjectText onClick={this.toggleAccordion} sideBarOpen={sideBarOpen}>
           {parent.frontmatter.title}
         </ProjectText>
         <div>
@@ -160,7 +158,7 @@ class Accordion extends Component {
             active={(parent.fields.slug === location).toString()}
             sideBarOpen={sideBarOpen}
             style={{
-              paddingLeft: '45px',
+              paddingLeft: `${sideBarOpen ? '45px' : '0px'}`,
               fontFamily: 'Avenir',
               fontWeight: 400,
             }}
@@ -174,7 +172,7 @@ class Accordion extends Component {
               location={location}
               sideBarOpen={sideBarOpen}
               style={{
-                paddingLeft: '45px',
+                paddingLeft: `${sideBarOpen ? '45px' : '0px'}`,
                 fontFamily: 'Avenir',
                 fontWeight: 400,
               }}
