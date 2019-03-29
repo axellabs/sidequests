@@ -42,7 +42,7 @@ const StyledSideBar = styled.div`
   overflow-y: auto;
   overflow-x: hidden;
   width: ${props => (props.open ? '500px' : '55px')};
-  min-height: 100vh;
+  height: 100%;
   background-color: white;
   color: black;
   padding: 1.45rem 0;

@@ -6,7 +6,7 @@ const StyledContentContainer = styled.div`
   background-color: black;
   color: white;
   width: 100%;
-  min-height: 100vh;
+  height: 100%;
   overflow-y: auto;
   font-family: Austin;
   font-weight: 400;

@@ -9,6 +9,7 @@ import './layout.css'
 
 const StyledPageContainer = styled.div`
   display: flex;
+  height: 100vh;
 `
 
 const Layout = ({ children }) => (
