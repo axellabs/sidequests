@@ -23,7 +23,7 @@ const Header = styled.div`
   font-size: 45px;
   color: black;
   padding: ${props => (props.open ? '20px' : 0)};
-  min-height: 85px;
+  min-height: 106px;
   margin-top: 20px;
   margin-bottom: 70px;
   font-family: Austin;
@@ -125,7 +125,7 @@ const ChildLink = props => (
 )
 
 const StyledAccordion = styled.div`
-  height: ${props => (props.open ? 'auto' : '45px')};
+  height: ${props => (props.open ? 'auto' : '40px')};
   overflow-y: hidden;
   overflow-x: hidden;
 `
