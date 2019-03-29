@@ -60,40 +60,47 @@ const StyledLink = styled(Link).attrs({
 })`
   padding: 10px 0;
   width: 100%;
-  color: ${props => (props.active === 'true' ? 'white' : 'black')};
+  color: ${props => (props.active === 'true' ? 'white' : 'inherit')};
   background-color: ${props => (props.active === 'true' ? 'black' : 'white')};
   text-decoration: none;
   display: flex;
   font-family: inherit;
   p {
     font-size: 16px;
-    color: ${props => (props.active === 'true' ? 'white' : 'black')};
+    color: ${props => (props.active === 'true' ? 'white' : 'inherit')};
     text-decoration: none;
     margin-bottom: 0px;
+    visibility: ${props => (props.sideBarOpen ? 'visible' : 'visible')};
+    width: ${props => (props.sideBarOpen ? '0px' : '100%')};
+  }
+  &:hover {
+    color: #1f058e;
   }
 `
 
 const StyledText = styled.p`
   font-size: 16px;
-  color: black;
+  color: inherit;
   margin-bottom: 0px;
+`
+const ProjectTextStyled = styled.div`
+  display: flex;
+  cursor: pointer;
+  z-index: 10;
+  padding: 10px 0;
+  font-family: Avenir;
+  font-weight: 500;
+  color: ${props => (props.open ? '#1f058e' : 'inherit')};
+  &:hover {
+    color: #1f058e;
+  }
 `
 
 const ProjectText = props => (
-  <div
-    style={{
-      display: 'flex',
-      cursor: 'pointer',
-      zIndex: 10,
-      padding: '10px 0',
-      fontFamily: 'Avenir',
-      fontWeight: 500,
-    }}
-    onClick={props.onClick}
-  >
+  <ProjectTextStyled {...props}>
     <StyledLinkIcon src={book} />
     <StyledText>{props.children}</StyledText>
-  </div>
+  </ProjectTextStyled>
 )
 
 const SideBarLink = props => (
@@ -139,7 +146,7 @@ class Accordion extends Component {
   }
 
   render() {
-    const { parent, subposts, location } = this.props
+    const { parent, subposts, location, sideBarOpen } = this.props
     const { open } = this.state
     return (
       <StyledAccordion open={open}>
@@ -151,6 +158,7 @@ class Accordion extends Component {
             to={parent.fields.slug}
             open={open}
             active={(parent.fields.slug === location).toString()}
+            sideBarOpen={sideBarOpen}
             style={{
               paddingLeft: '45px',
               fontFamily: 'Avenir',
@@ -164,6 +172,7 @@ class Accordion extends Component {
               to={post.fields.slug}
               key={post.fields.slug}
               location={location}
+              sideBarOpen={sideBarOpen}
               style={{
                 paddingLeft: '45px',
                 fontFamily: 'Avenir',
@@ -195,6 +204,7 @@ class SideBar extends Component {
 
   render() {
     const { data } = this.props
+    const { open } = this.state
     const { edges: posts } = data.allMdx
 
     const parentPosts = posts.filter(
@@ -211,8 +221,8 @@ class SideBar extends Component {
     }))
 
     return (
-      <StyledSideBar open={this.state.open}>
-        <Header open={this.state.open}>
+      <StyledSideBar open={open}>
+        <Header open={open}>
           <StyledLink to="/">{data.site.siteMetadata.title}</StyledLink>
           <StyledLinkIcon src={arrow} onClick={this.toggleSideBar} />
         </Header>
@@ -225,6 +235,7 @@ class SideBar extends Component {
                   src={fire}
                   activeSrc={fireDark}
                   active={('/' === location.pathname).toString()}
+                  sideBarOpen={open}
                   style={{
                     fontFamily: 'Avenir',
                     fontWeight: 500,
@@ -237,6 +248,7 @@ class SideBar extends Component {
                   src={spinner}
                   activeSrc={spinnerDark}
                   active={('/brainstorm/' === location.pathname).toString()}
+                  sideBarOpen={open}
                   style={{
                     fontFamily: 'Avenir',
                     fontWeight: 500,
@@ -250,6 +262,7 @@ class SideBar extends Component {
                     subposts={accordionData.subnodes}
                     key={accordionData.parent.frontmatter.title}
                     location={location.pathname}
+                    sideBarOpen={open}
                   />
                 ))}
               </>
