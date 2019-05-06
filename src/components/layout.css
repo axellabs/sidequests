@@ -1,36 +1,8 @@
-@font-face {
-  font-family: Avenir;
-  src: url('../assets/fonts/AvenirNextLTPro-HeavyCn.otf') format('otf');
-  font-weight: 500;
-}
-
-@font-face {
-  font-family: Avenir;
-  src: url('../assets/fonts/AvenirNextLTPro-MediumCn.otf') format('otf');
-  font-weight: 400;
-}
-
-@font-face {
-  font-family: Austin;
-  src: url('../assets/fonts/Austin-Roman.otf') format('otf');
-  font-weight: 400;
-}
-
-@font-face {
-  font-family: Austin;
-  src: url('../assets/fonts/Austin-Italic.otf') format('otf');
-  font-weight: 400;
-  font-style: italic;
-}
-
-@font-face {
-  font-family: Austin;
-  src: url('../assets/fonts/Austin-Bold.otf') format('otf');
-  font-weight: 600;
-}
+@import url('https://fonts.googleapis.com/css?family=Roboto:100,300,400,500,700');
+@import url('https://fonts.googleapis.com/css?family=Roboto+Condensed:300,400,700');
 
 html {
-  font-family: Austin, sans-serif;
+  font-family: 'Roboto', sans-serif;
   -ms-text-size-adjust: 100%;
   -webkit-text-size-adjust: 100%;
 }
@@ -72,7 +44,11 @@ template {
 a {
   background-color: transparent;
   -webkit-text-decoration-skip: objects;
+  color: #89c4f4;
 }
+/* a:visited {
+  color: #89c4f4;
+} */
 a:active,
 a:hover {
   outline-width: 0;

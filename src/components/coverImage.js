@@ -7,7 +7,7 @@ const StyledCoverImage = styled.div`
   position: relative;
   overflow: hidden;
   margin: ${props =>
-    props.page ? '-1.45rem -1.0875rem 1.45rem  -1.0875rem' : '0'};
+    props.page ? '-5rem -1.0875rem 5rem  -1.0875rem' : '0'};
 `
 
 const StyledCoverTitle = styled.div`
@@ -24,6 +24,7 @@ const StyledCoverTitle = styled.div`
   background-color: rgba(0, 0, 0, 0.5);
   padding: 0 30px;
   line-height: 1.5;
+  font-weight: 300;
 `
 
 const CoverImage = props => (

@@ -3,7 +3,7 @@ import styled from 'styled-components'
 import { Link, StaticQuery, graphql } from 'gatsby'
 import { Location } from '@reach/router'
 
-import arrow from '../assets/icons/arrow.svg'
+import arrow from '../assets/icons/arrow-dark.svg'
 import fire from '../assets/icons/fire-light.svg'
 import spinner from '../assets/icons/spinner-light.svg'
 import folder from '../assets/icons/folder.svg'
@@ -21,13 +21,12 @@ const Header = styled.div`
   justify-content: space-between;
   align-items: center;
   font-size: 45px;
-  color: black;
+  color: white;
   padding: ${props => (props.open ? '20px' : 0)};
   min-height: 106px;
-  margin-top: 20px;
-  margin-bottom: 70px;
-  font-family: Austin;
-  font-weight: 600;
+  margin-bottom: 80px;
+  font-family: Roboto;
+  font-weight: 300;
   a {
     visibility: ${props => (props.open ? 'visible' : 'hidden')};
     width: ${props => (props.open ? 'auto' : '0px')};
@@ -43,10 +42,11 @@ const StyledSideBar = styled.div`
   overflow-x: hidden;
   width: ${props => (props.open ? '500px' : '55px')};
   height: 100%;
-  background-color: white;
-  color: black;
+  background-color: black;
+  color: white;
   padding: 1.45rem 0;
   transition: width 0.3s;
+  border-right: 2px solid white;
 `
 
 const StyledLinkIcon = styled.img`
@@ -62,18 +62,18 @@ const StyledLink = styled(Link).attrs({
   padding: 10px 0;
   width: 100%;
   color: ${props => (props.active === 'true' ? 'white' : 'inherit')};
-  background-color: ${props => (props.active === 'true' ? 'black' : 'white')};
+  background-color: ${props => (props.active === 'true' ? 'white' : 'black')};
   text-decoration: none;
   display: flex;
-  font-family: inherit;
+  font-family: Roboto;
   p {
     font-size: 16px;
-    color: ${props => (props.active === 'true' ? 'white' : 'inherit')};
+    color: ${props => (props.active === 'true' ? 'black' : 'inherit')};
     text-decoration: none;
     margin-bottom: 0px;
   }
   &:hover {
-    color: #1f058e;
+    color: #89c4f4;
   }
 `
 
@@ -87,11 +87,11 @@ const ProjectTextStyled = styled.div`
   cursor: pointer;
   z-index: 10;
   padding: 10px 0;
-  font-family: Avenir;
-  font-weight: 500;
-  color: ${props => (props.open ? '#1f058e' : 'inherit')};
+  font-family: Roboto;
+  font-weight: 400;
+  color: ${props => (props.open ? '#89c4f4' : 'inherit')};
   &:hover {
-    color: #1f058e;
+    color: #89c4f4;
   }
 `
 
@@ -112,15 +112,15 @@ const SideBarLink = props => (
 )
 
 const ParentLink = props => (
-  <SideBarLink {...props} src={home} activeSrc={homeDark} />
+  <SideBarLink {...props} src={homeDark} activeSrc={home} />
 )
 
 const ChildLink = props => (
   <SideBarLink
     {...props}
     active={(props.to === props.location).toString()}
-    src={star}
-    activeSrc={starDark}
+    src={starDark}
+    activeSrc={star}
   />
 )
 
@@ -164,7 +164,7 @@ class Accordion extends Component {
             sideBarOpen={sideBarOpen}
             style={{
               paddingLeft: `${sideBarOpen ? '45px' : '0px'}`,
-              fontFamily: 'Avenir',
+              fontFamily: 'Roboto',
               fontWeight: 400,
             }}
           >
@@ -178,7 +178,7 @@ class Accordion extends Component {
               sideBarOpen={sideBarOpen}
               style={{
                 paddingLeft: `${sideBarOpen ? '45px' : '0px'}`,
-                fontFamily: 'Avenir',
+                fontFamily: 'Roboto',
                 fontWeight: 400,
               }}
             >
@@ -235,12 +235,12 @@ class SideBar extends Component {
               <>
                 <SideBarLink
                   to="/"
-                  src={fire}
-                  activeSrc={fireDark}
+                  src={fireDark}
+                  activeSrc={fire}
                   active={('/' === location.pathname).toString()}
                   sideBarOpen={open}
                   style={{
-                    fontFamily: 'Avenir',
+                    fontFamily: 'Roboto',
                     fontWeight: 500,
                   }}
                 >
@@ -248,12 +248,12 @@ class SideBar extends Component {
                 </SideBarLink>
                 <SideBarLink
                   to="/brainstorm/"
-                  src={spinner}
-                  activeSrc={spinnerDark}
+                  src={spinnerDark}
+                  activeSrc={spinner}
                   active={('/brainstorm/' === location.pathname).toString()}
                   sideBarOpen={open}
                   style={{
-                    fontFamily: 'Avenir',
+                    fontFamily: 'Roboto',
                     fontWeight: 500,
                   }}
                 >
