@@ -35,6 +35,10 @@ const Header = styled.div`
   img {
     transform: ${props => (props.open ? 'none' : 'rotate(180deg)')};
   }
+
+  @media (max-width: 900px) {
+    display: none;
+  }
 `
 
 const StyledSideBar = styled.div`
