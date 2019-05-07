@@ -53,6 +53,11 @@ const StyledLinkIcon = styled.img`
   height: 20px;
   width: 20px;
   cursor: pointer;
+  @media (max-width: 900px) {
+    &.arrow {
+      display: none;
+    }
+  }
 `
 
 const StyledLink = styled(Link).attrs({
@@ -152,7 +157,7 @@ class Accordion extends Component {
   constructor(props) {
     super(props)
     this.state = {
-      open: false,
+      open: window.innerWidth < 900 ? true : false,
     }
   }
 
@@ -209,7 +214,7 @@ class SideBar extends Component {
   constructor(props) {
     super(props)
     this.state = {
-      open: true,
+      open: window.innerWidth < 900 ? false : true,
     }
   }
 
@@ -244,6 +249,7 @@ class SideBar extends Component {
           <StyledLinkIcon
             src={arrow}
             onClick={this.toggleSideBar}
+            className="arrow"
             style={{ marginRight: '20px', marginTop: '10px' }}
           />
         </Header>
