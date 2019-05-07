@@ -6,10 +6,10 @@ import { Location } from '@reach/router'
 import arrow from '../assets/icons/arrow-dark.svg'
 import fire from '../assets/icons/fire-light.svg'
 import spinner from '../assets/icons/spinner-light.svg'
-import folder from '../assets/icons/folder.svg'
-import folderOpen from '../assets/icons/folder-open.svg'
 import star from '../assets/icons/star-light.svg'
 import home from '../assets/icons/home-light.svg'
+import folder from '../assets/icons/folder.svg'
+import folderOpen from '../assets/icons/folder-open.svg'
 
 import fireDark from '../assets/icons/fire.svg'
 import spinnerDark from '../assets/icons/spinner.svg'
@@ -40,7 +40,7 @@ const Header = styled.div`
 const StyledSideBar = styled.div`
   overflow-y: auto;
   overflow-x: hidden;
-  width: ${props => (props.open ? '500px' : '55px')};
+  width: ${props => (props.open ? '500px' : '65px')};
   height: 100%;
   background-color: black;
   color: white;
@@ -52,14 +52,13 @@ const StyledSideBar = styled.div`
 const StyledLinkIcon = styled.img`
   height: 20px;
   width: 20px;
-  margin: 0 20px;
   cursor: pointer;
 `
 
 const StyledLink = styled(Link).attrs({
   alt: 'project page icon',
 })`
-  padding: 10px 0;
+  padding: 10px 0 10px 20px;
   width: 100%;
   color: ${props => (props.active === 'true' ? 'white' : 'inherit')};
   background-color: ${props => (props.active === 'true' ? 'white' : 'black')};
@@ -89,6 +88,7 @@ const ProjectTextStyled = styled.div`
   padding: 10px 0;
   font-family: Roboto;
   font-weight: 400;
+  padding-left: 20px;
   color: ${props => (props.open ? '#89c4f4' : 'inherit')};
   &:hover {
     color: #89c4f4;
@@ -97,7 +97,10 @@ const ProjectTextStyled = styled.div`
 
 const ProjectText = props => (
   <ProjectTextStyled {...props}>
-    <StyledLinkIcon src={props.open ? folderOpen : folder} />
+    <StyledLinkIcon
+      src={props.open ? folderOpen : folder}
+      style={{ display: props.sideBarOpen ? 'none' : 'block' }}
+    />
     {props.sideBarOpen ? <StyledText>{props.children}</StyledText> : <p />}
   </ProjectTextStyled>
 )
@@ -105,6 +108,7 @@ const ProjectText = props => (
 const SideBarLink = props => (
   <StyledLink to={props.to} active={props.active} style={props.style}>
     <StyledLinkIcon
+      style={{ display: props.sideBarOpen ? 'none' : 'block' }}
       src={props.active === 'true' ? props.activeSrc : props.src}
     />
     {props.sideBarOpen ? <p>{props.children}</p> : <p />}
@@ -112,7 +116,16 @@ const SideBarLink = props => (
 )
 
 const ParentLink = props => (
-  <SideBarLink {...props} src={homeDark} activeSrc={home} />
+  <SideBarLink
+    {...props}
+    src={homeDark}
+    activeSrc={home}
+    style={{
+      paddingLeft: props.sideBarOpen ? '60px' : '20px',
+      fontFamily: 'Roboto',
+      fontWeight: 400,
+    }}
+  />
 )
 
 const ChildLink = props => (
@@ -121,6 +134,11 @@ const ChildLink = props => (
     active={(props.to === props.location).toString()}
     src={starDark}
     activeSrc={star}
+    style={{
+      paddingLeft: props.sideBarOpen ? '60px' : '20px',
+      fontFamily: 'Roboto',
+      fontWeight: 400,
+    }}
   />
 )
 
@@ -156,16 +174,14 @@ class Accordion extends Component {
         >
           {parent.frontmatter.title}
         </ProjectText>
-        <div>
+        <div style={{ marginRight: sideBarOpen ? '20px' : '0px' }}>
           <ParentLink
             to={parent.fields.slug}
             open={open}
             active={(parent.fields.slug === location).toString()}
             sideBarOpen={sideBarOpen}
             style={{
-              paddingLeft: `${sideBarOpen ? '45px' : '0px'}`,
-              fontFamily: 'Roboto',
-              fontWeight: 400,
+              paddingLeft: '50px',
             }}
           >
             {parent.frontmatter.title}
@@ -177,9 +193,7 @@ class Accordion extends Component {
               location={location}
               sideBarOpen={sideBarOpen}
               style={{
-                paddingLeft: `${sideBarOpen ? '45px' : '0px'}`,
-                fontFamily: 'Roboto',
-                fontWeight: 400,
+                paddingLeft: sideBarOpen ? '40px' : '0px',
               }}
             >
               {post.frontmatter.title}
@@ -227,7 +241,11 @@ class SideBar extends Component {
       <StyledSideBar open={open}>
         <Header open={open}>
           <StyledLink to="/">{data.site.siteMetadata.title}</StyledLink>
-          <StyledLinkIcon src={arrow} onClick={this.toggleSideBar} />
+          <StyledLinkIcon
+            src={arrow}
+            onClick={this.toggleSideBar}
+            style={{ marginRight: '20px', marginTop: '10px' }}
+          />
         </Header>
         <Location>
           {({ location }) => {
@@ -235,15 +253,14 @@ class SideBar extends Component {
               <>
                 <SideBarLink
                   to="/"
+                  active={('/' === location.pathname).toString()}
                   src={fireDark}
                   activeSrc={fire}
-                  active={('/' === location.pathname).toString()}
                   sideBarOpen={open}
-                  style={{
-                    fontFamily: 'Roboto',
-                    fontWeight: 500,
-                  }}
                 >
+                  <span role="img" aria-label="star">
+                    ⭐️{' '}
+                  </span>
                   Favorites
                 </SideBarLink>
                 <SideBarLink
@@ -252,12 +269,11 @@ class SideBar extends Component {
                   activeSrc={spinner}
                   active={('/brainstorm/' === location.pathname).toString()}
                   sideBarOpen={open}
-                  style={{
-                    fontFamily: 'Roboto',
-                    fontWeight: 500,
-                  }}
                 >
-                  Running Projects
+                  <span role="img" aria-label="star">
+                    🧠{' '}
+                  </span>{' '}
+                  Project Brainstorm
                 </SideBarLink>
                 {hierarchalPosts.map(accordionData => (
                   <Accordion
