@@ -6,6 +6,10 @@ const StyledPage = styled.div`
   background-color: inherit;
   color: white;
   width: 100%;
+
+  @media (max-width: 900px) {
+    padding: 2.25rem 1.0875rem;
+  }
 `
 
 const DefaultPageLayout = props => <StyledPage>{props.children}</StyledPage>

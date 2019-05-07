@@ -6,8 +6,12 @@ const StyledCoverImage = styled.div`
   height: 150px;
   position: relative;
   overflow: hidden;
-  margin: ${props =>
-    props.page ? '-5rem -1.0875rem 5rem  -1.0875rem' : '0'};
+  margin: ${props => (props.page ? '-5rem -1.0875rem 5rem  -1.0875rem' : '0')};
+
+  @media (max-width: 900px) {
+    margin: ${props =>
+      props.page ? '-2.25rem -1.0875rem 2.25rem  -1.0875rem' : '0'};
+  }
 `
 
 const StyledCoverTitle = styled.div`
@@ -25,6 +29,9 @@ const StyledCoverTitle = styled.div`
   padding: 0 30px;
   line-height: 1.5;
   font-weight: 300;
+  @media (max-width: 900px) {
+    font-size: 2.25rem;
+  }
 `
 
 const CoverImage = props => (
