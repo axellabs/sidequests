@@ -3,9 +3,10 @@ import PropTypes from 'prop-types'
 import { StaticQuery, graphql } from 'gatsby'
 import styled from 'styled-components'
 
+import './layout.css'
 import SideBar from './sidebar'
 import Content from './content'
-import './layout.css'
+
 
 const StyledPageContainer = styled.div`
   display: flex;
