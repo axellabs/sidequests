@@ -157,8 +157,14 @@ class Accordion extends Component {
   constructor(props) {
     super(props)
     this.state = {
-      open: window.innerWidth < 900 ? true : false,
+      open: false,
     }
+  }
+
+  componentDidMount() {
+    this.setState({
+      open: window.innerWidth < 900 ? true : false,
+    })
   }
 
   toggleAccordion = () => {
@@ -214,8 +220,14 @@ class SideBar extends Component {
   constructor(props) {
     super(props)
     this.state = {
-      open: window.innerWidth < 900 ? false : true,
+      open: true,
     }
+  }
+
+  componentDidMount() {
+    this.setState({
+      open: window.innerWidth < 900 ? false : true,
+    })
   }
 
   toggleSideBar = () => {
