@@ -5,6 +5,12 @@ import MDXRenderer from 'gatsby-mdx/mdx-renderer'
 import DefaultPageLayout from './defaultPageLayout'
 import CoverImage from './coverImage'
 import SEO from './seo'
+import LinkPreview from './link-preview'
+
+const scope = {
+  React: React,
+  LinkPreview: LinkPreview,
+}
 
 function ProjectPage({ data }) {
   return (
@@ -14,7 +20,7 @@ function ProjectPage({ data }) {
         {data.mdx.frontmatter.title}
       </CoverImage>
       <DefaultPageLayout>
-        <MDXRenderer>{data.mdx.code.body}</MDXRenderer>
+        <MDXRenderer scope={scope}>{data.mdx.code.body}</MDXRenderer>
       </DefaultPageLayout>
     </>
   )
