@@ -1,37 +1,28 @@
 import React from 'react'
 import PropTypes from 'prop-types'
-import { StaticQuery, graphql } from 'gatsby'
 import styled from 'styled-components'
+import { MDXProvider } from '@mdx-js/tag'
 
 import './layout.css'
 import SideBar from './sidebar'
 import Content from './content'
-
+import components from './mdx-components'
 
 const StyledPageContainer = styled.div`
   display: flex;
   height: 100vh;
 `
 
-const Layout = ({ children }) => (
-  <StaticQuery
-    query={graphql`
-      query SiteTitleQuery {
-        site {
-          siteMetadata {
-            title
-          }
-        }
-      }
-    `}
-    render={data => (
+function Layout({ children }) {
+  return (
+    <MDXProvider components={components}>
       <StyledPageContainer>
-        <SideBar siteTitle={data.site.siteMetadata.title} />
+        <SideBar />
         <Content>{children}</Content>
       </StyledPageContainer>
-    )}
-  />
-)
+    </MDXProvider>
+  )
+}
 
 Layout.propTypes = {
   children: PropTypes.node.isRequired,
