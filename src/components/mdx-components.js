@@ -64,7 +64,7 @@ const P = styled.div`
   font-family: Roboto;
   font-size: 1.3rem;
   font-weight: 300;
-  line-height: 1.3;
+  line-height: 1.5;
   letter-spacing: 0.06em;
   margin-bottom: 15px;
 
@@ -77,7 +77,7 @@ const listItem = styled.li`
   font-family: Roboto;
   font-size: 1.3rem;
   font-weight: 300;
-  line-height: 1.3;
+  line-height: 1.5;
   letter-spacing: 0.06em;
   margin-bottom: 15px;
 
